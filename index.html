@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Vehicle Safety Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>⛏️ MINE VEHICLE SAFETY MONITORING</h1>
+        <p>Smart Automation & Mining Safety | SIH 2026</p>
+    </div>
+
+    <div class="live">
+        <span></span> SYSTEM LIVE
+    </div>
+</header>
+
+<!-- SUMMARY CARDS -->
+<section class="summary">
+
+    <div class="card">
+        <div class="icon">🚛</div>
+        <div>
+            <h3>ACTIVE VEHICLES</h3>
+            <strong id="vehicleCount">5</strong>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">🌫️</div>
+        <div>
+            <h3>FOG LEVEL</h3>
+            <strong id="fogLevel">68%</strong>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">⚠️</div>
+        <div>
+            <h3>ACTIVE ALERTS</h3>
+            <strong id="alertCount">2</strong>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="icon">🔴</div>
+        <div>
+            <h3>CRITICAL VEHICLES</h3>
+            <strong id="criticalCount">1</strong>
+        </div>
+    </div>
+
+</section>
+
+<!-- MAIN AREA -->
+<section class="main-grid">
+
+    <!-- MINE MAP -->
+    <div class="panel map-panel">
+
+        <div class="panel-title">
+            <h2>🗺️ LIVE MINE MAP</h2>
+            <span id="mapStatus">LIVE</span>
+        </div>
+
+        <div class="mine-map">
+
+            <div class="road road1"></div>
+            <div class="road road2"></div>
+            <div class="road road3"></div>
+
+            <div class="vehicle v1" id="mapV1">🚛</div>
+            <div class="vehicle v2" id="mapV2">🚛</div>
+            <div class="vehicle v3" id="mapV3">🚛</div>
+            <div class="vehicle v4" id="mapV4">🚛</div>
+            <div class="vehicle v5" id="mapV5">🚛</div>
+
+            <div class="hazard h1">⚠️</div>
+            <div class="hazard h2">⚠️</div>
+
+            <div class="map-label pit">MINING PIT</div>
+            <div class="map-label zone">HIGH-RISK ZONE</div>
+
+        </div>
+
+        <div class="legend">
+            <span>🟢 Safe</span>
+            <span>🟠 Warning</span>
+            <span>🔴 Critical</span>
+            <span>⚠️ Hazard</span>
+        </div>
+
+    </div>
+
+
+    <!-- SELECTED VEHICLE -->
+    <div class="panel">
+
+        <div class="panel-title">
+            <h2>🚛 VEHICLE STATUS</h2>
+            <select id="vehicleSelect">
+                <option value="0">Vehicle V-01</option>
+                <option value="1">Vehicle V-02</option>
+                <option value="2">Vehicle V-03</option>
+                <option value="3">Vehicle V-04</option>
+                <option value="4">Vehicle V-05</option>
+            </select>
+        </div>
+
+        <div class="vehicle-name">
+            <h2 id="selectedVehicle">Vehicle V-01</h2>
+            <span id="statusBadge" class="warning">WARNING</span>
+        </div>
+
+        <div class="data-grid">
+
+            <div class="data-box">
+                <span>Speed</span>
+                <strong id="speed">8.0 m/s</strong>
+            </div>
+
+            <div class="data-box">
+                <span>Distance</span>
+                <strong id="distance">35 m</strong>
+            </div>
+
+            <div class="data-box">
+                <span>TTC</span>
+                <strong id="ttc">4.4 s</strong>
+            </div>
+
+            <div class="data-box">
+                <span>Fog</span>
+                <strong id="vehicleFog">68%</strong>
+            </div>
+
+        </div>
+
+        <h3 class="section-heading">Sensor Health</h3>
+
+        <div class="sensor-list">
+
+            <div>
+                <span>📡 FMCW Radar</span>
+                <b class="ok">● ONLINE</b>
+            </div>
+
+            <div>
+                <span>🔦 LiDAR</span>
+                <b class="ok">● ONLINE</b>
+            </div>
+
+            <div>
+                <span>🌡️ Thermal Camera</span>
+                <b class="ok">● ONLINE</b>
+            </div>
+
+            <div>
+                <span>📍 GPS / RTK</span>
+                <b class="ok">● ONLINE</b>
+            </div>
+
+        </div>
+
+        <button id="simulateBtn" onclick="startSimulation()">
+            ▶ START SAFETY SIMULATION
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- RISK ANALYSIS -->
+<section class="lower-grid">
+
+    <div class="panel">
+
+        <div class="panel-title">
+            <h2>📊 COLLISION RISK ANALYSIS</h2>
+        </div>
+
+        <div class="risk-meter">
+
+            <div class="meter-background">
+                <div id="riskBar"></div>
+            </div>
+
+            <div class="risk-value">
+                <strong id="riskValue">62%</strong>
+                <span>Collision Risk</span>
+            </div>
+
+        </div>
+
+        <div class="risk-info">
+
+            <div>
+                <span>Relative Speed</span>
+                <strong id="relativeSpeed">8.0 m/s</strong>
+            </div>
+
+            <div>
+                <span>Stopping Distance</span>
+                <strong id="stoppingDistance">25 m</strong>
+            </div>
+
+            <div>
+                <span>Recommended Action</span>
+                <strong id="action">REDUCE SPEED</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERTS -->
+    <div class="panel">
+
+        <div class="panel-title">
+            <h2>🔔 SAFETY ALERTS</h2>
+            <span id="alertIndicator">2 ACTIVE</span>
+        </div>
+
+        <div id="alertList" class="alerts">
+
+            <div class="alert critical-alert">
+                <span>🔴</span>
+                <div>
+                    <strong>CRITICAL</strong>
+                    <p>Vehicle V-03 collision risk detected.</p>
+                    <small>Just now</small>
+                </div>
+            </div>
+
+            <div class="alert warning-alert">
+                <span>🟠</span>
+                <div>
+                    <strong>WARNING</strong>
+                    <p>Low visibility detected near Zone B.</p>
+                    <small>1 min ago</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SENSOR OVERVIEW -->
+<section class="panel sensor-overview">
+
+    <div class="panel-title">
+        <h2>📡 SENSOR & COMMUNICATION STATUS</h2>
+    </div>
+
+    <div class="sensor-cards">
+
+        <div class="sensor-card">
+            <div>📡</div>
+            <h3>FMCW RADAR</h3>
+            <p>Object Detection</p>
+            <strong>ONLINE</strong>
+        </div>
+
+        <div class="sensor-card">
+            <div>🔦</div>
+            <h3>LiDAR</h3>
+            <p>Road Mapping</p>
+            <strong>ONLINE</strong>
+        </div>
+
+        <div class="sensor-card">
+            <div>🌡️</div>
+            <h3>THERMAL</h3>
+            <p>Human Detection</p>
+            <strong>ONLINE</strong>
+        </div>
+
+        <div class="sensor-card">
+            <div>📍</div>
+            <h3>GPS / RTK</h3>
+            <p>Vehicle Location</p>
+            <strong>ONLINE</strong>
+        </div>
+
+        <div class="sensor-card">
+            <div>📶</div>
+            <h3>V2V / V2I</h3>
+            <p>Fleet Communication</p>
+            <strong>CONNECTED</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    <p>Mine Vehicle Safety Monitoring System | E2 Titans | SIH 2026</p>
+    <p>Sensor Data → Fusion → Risk Detection → Alert → Control Room</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
